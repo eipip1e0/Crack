@@ -20,8 +20,7 @@ public class Rename {
             inputFolder += '/';
         }
         if(outputFolder == null){
-            String parent = new File(inputFolder).getParent();
-            outputFolder = parent + "\\output\\";
+            outputFolder = inputFolder + "output\\";
         }
 
         //1. 创建文件夹

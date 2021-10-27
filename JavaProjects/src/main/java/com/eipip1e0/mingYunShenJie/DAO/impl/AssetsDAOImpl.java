@@ -1,6 +1,7 @@
 package com.eipip1e0.mingYunShenJie.DAO.impl;
 
 import com.eipip1e0.mingYunShenJie.DAO.AssetsDAO;
+import com.eipip1e0.mingYunShenJie.bean.PathManager;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,10 +10,13 @@ import java.util.List;
 import java.util.Map;
 
 public class AssetsDAOImpl implements AssetsDAO {
-
     @Override
     public List<String> queryLogicAddress() {
-        String url = "jdbc:sqlite:src/main/resources/mingYunShenJie/assets.db";
+        String dbPath = PathManager.getInstance().getDbPath();
+        if(dbPath == null){
+            throw new RuntimeException("未指定正确的assets.db路径");
+        }
+        String url = "jdbc:sqlite:"+dbPath;
         Connection connection = null;
         List<String> logicAddresses = null;
         try {
@@ -45,7 +49,12 @@ public class AssetsDAOImpl implements AssetsDAO {
 
     @Override
     public List<String> queryRealAddress() {
-        String url = "jdbc:sqlite:src/main/resources/mingYunShenJie/assets.db";
+        String dbPath = PathManager.getInstance().getDbPath();
+        if(dbPath == null){
+            throw new RuntimeException("未指定正确的assets.db路径");
+        }
+
+        String url = "jdbc:sqlite:"+dbPath;
         Connection connection = null;
         List<String> realAddresses = null;
         try {
@@ -77,7 +86,11 @@ public class AssetsDAOImpl implements AssetsDAO {
 
     @Override
     public Map<String, String> queryLogicAndRealForMap() {
-        String url = "jdbc:sqlite:src/main/resources/mingYunShenJie/assets.db";
+        String dbPath = PathManager.getInstance().getDbPath();
+        if(dbPath == null){
+            throw new RuntimeException("未指定正确的assets.db路径");
+        }
+        String url = "jdbc:sqlite:"+dbPath;
         Connection connection = null;
         Map<String,String> logicAndRealAddressesMap = null;
         try {
